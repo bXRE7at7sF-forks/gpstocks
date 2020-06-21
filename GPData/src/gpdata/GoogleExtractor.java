@@ -31,9 +31,9 @@ public class GoogleExtractor extends Extractor {
 
 //    /dates, TechnicalIndicators, fullFileName
     public GoogleExtractor(String[] dates, String[] tI, String fileName) {
-        outputLines = new ArrayList();
-        historicalData = new ArrayList();
-        indicators = new ArrayList();
+        outputLines = new ArrayList<>();
+        historicalData = new ArrayList<>();
+        indicators = new ArrayList<>();
 
         technicalIndicators = tI;
         fullFileName = fileName;
@@ -45,7 +45,7 @@ public class GoogleExtractor extends Extractor {
     public void extractBetweenDates() {
         try {
             outputLines = null;
-            outputLines = new ArrayList();
+            outputLines = new ArrayList<>();
             BufferedReader br = this.getBufferedReader(fullFileName);
             String outputFile = fullFileName.replaceAll(".csv", "") + " temp.csv";
             FileWriter fw = this.getFileWriter(outputFile);
@@ -79,7 +79,7 @@ public class GoogleExtractor extends Extractor {
 
     public void getHistory(String fileName) {
         try {
-            historicalData = new ArrayList();
+            historicalData = new ArrayList<>();
             FileReader fr = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fr);
             String rawLine = br.readLine();
@@ -95,7 +95,7 @@ public class GoogleExtractor extends Extractor {
                     int volume = Integer.parseInt(rawLineSplit[5]);
                     Historical historicalDataPoint = new Historical(date, open, high, low, close, volume);
                     historicalData.add(historicalDataPoint);
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 rawLine = br.readLine();
             }
@@ -230,9 +230,8 @@ public class GoogleExtractor extends Extractor {
 
     private double priceChange(double close, double open) {
         double difference = close - open;
-        double movement = (difference / open) * 100;
         //System.out.println("open: " + open + ", close: " + close + ", movement" + movement);
-        return movement;
+        return (difference / open) * 100;
     }
 
     public void writeTechnicals() {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GPData/GPData.iml" filepath="$PROJECT_DIR$/GPData/GPData.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GPFinance/GPFinance.iml" filepath="$PROJECT_DIR$/GPFinance/GPFinance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Java_GPStocks.iml" filepath="$PROJECT_DIR$/.idea/Java_GPStocks.iml" />
+    </modules>
+  </component>
+</project>

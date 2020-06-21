@@ -25,14 +25,14 @@ public class MorningstarExtractor extends Extractor {
     }
 
     private void initializeVariables(String[] years, String[] indicators) {
-        rawData = new ArrayList();
-        indicatorsToExtract = new ArrayList();
+        rawData = new ArrayList<>();
+        indicatorsToExtract = new ArrayList<>();
         indicatorsToExtract.addAll(Arrays.asList(indicators));
         initYearsToExtract(years);
     }
 
     private void initYearsToExtract(String[] years) {
-        yearsToExtract = new ArrayList();
+        yearsToExtract = new ArrayList<>();
 
         for (String year : years) {
             try {
@@ -95,9 +95,8 @@ public class MorningstarExtractor extends Extractor {
 
     private double change(double close, double open) {
         double difference = close - open;
-        double movement = (difference / open) * 100;
         //System.out.println("open: " + open + ", close: " + close + ", movement" + movement);
-        return movement;
+        return (difference / open) * 100;
     }
 
     public void writeDataToFile() {
@@ -106,22 +105,22 @@ public class MorningstarExtractor extends Extractor {
             String outputFileName = morningstarFileName.replaceAll(".csv", "") + " Indicators.csv";
             BufferedReader br;
             FileWriter fw = this.getFileWriter(outputFileName);
-            for (int i = 0; i < rawData.size(); i++) {
-                if (indicatorsToExtract.contains(rawData.get(i).indicatorName)) {
+            for (Indicator rawDatum : rawData) {
+                if (indicatorsToExtract.contains(rawDatum.indicatorName)) {
 
-                    String indicatorValue2009 = rawData.get(i).values[0];
-                    String indicatorValue2010 = rawData.get(i).values[1];
+                    String indicatorValue2009 = rawDatum.values[0];
+                    String indicatorValue2010 = rawDatum.values[1];
                     if (indicatorValue2009.equals("")) {
                         indicatorValue2009 = indicatorValue2010;
                     }
 
-                    fw.write(rawData.get(i).indicatorName + " 2009," + indicatorValue2009 + "\n");
-                    fw.write(rawData.get(i).indicatorName + " 2010," + indicatorValue2010 + "\n");
+                    fw.write(rawDatum.indicatorName + " 2009," + indicatorValue2009 + "\n");
+                    fw.write(rawDatum.indicatorName + " 2010," + indicatorValue2010 + "\n");
 
                     double indicatorValue2009D = Double.parseDouble(indicatorValue2009);
                     double indicatorValue2010D = Double.parseDouble(indicatorValue2010);
                     double change = change(indicatorValue2010D, indicatorValue2009D);
-                    fw.write(rawData.get(i).indicatorName + " YoY % change," + df.format(change) + "\n");
+                    fw.write(rawDatum.indicatorName + " YoY % change," + df.format(change) + "\n");
 
                     fw.flush();
                 }
@@ -130,14 +129,14 @@ public class MorningstarExtractor extends Extractor {
             String lineOut = br.readLine();
             boolean hadRD = false;
             while (lineOut != null) {
-                String lineOutSplit[] = lineOut.split(",");
+                String[] lineOutSplit = lineOut.split(",");
                 if (lineOutSplit[0].equals("R&D")) {
                     hadRD = true;
                     break;
                 }
                 lineOut = br.readLine();
             }
-            if (hadRD == false) {
+            if (!hadRD) {
                 String RNDAvgOut = "R&D,13.575769,13.575769";
                 fw.write(RNDAvgOut);
                 System.out.println("R&D");

@@ -7,6 +7,7 @@
 package gpdata;
 
 import java.io.*;
+import java.util.Objects;
 
 /**
  *
@@ -14,11 +15,11 @@ import java.io.*;
  */
 public class RenameFiles {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         String path = "/home/stuart/Documents/GPStocks/GPData/Data/";
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
-        for (File file : listOfFiles) {
+        for (File file : Objects.requireNonNull(listOfFiles)) {
             try {
                 if (!file.getName().contains("Technical")) {
                     BufferedReader br = new BufferedReader(new FileReader(path + file.getName()));

@@ -20,8 +20,7 @@ public class Extractor {
     public BufferedReader getBufferedReader(String fullPathToFile) {
         try {
             FileReader fr = new FileReader(fullPathToFile);
-            BufferedReader br = new BufferedReader(fr);
-            return br;
+            return new BufferedReader(fr);
         } catch (IOException ioexception) {
             System.out.println("IO Error caught: " + ioexception);
             return null;
@@ -33,8 +32,7 @@ public class Extractor {
 
     public FileWriter getFileWriter(String fullPathToFile) {
         try {
-            FileWriter fw = new FileWriter(fullPathToFile);
-            return fw;
+            return new FileWriter(fullPathToFile);
         } catch (IOException ioexception) {
             System.out.println("IO Error caught: " + ioexception);
             return null;
@@ -46,7 +44,6 @@ public class Extractor {
 
     public File[] getDirectoryListing(String fullPathToDirectory) {
         File folder = new File(fullPathToDirectory);
-        File[] listOfFiles = folder.listFiles();
-        return listOfFiles;
+        return folder.listFiles();
     }
 }

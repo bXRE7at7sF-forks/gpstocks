@@ -7,6 +7,7 @@
 package gpdata;
 
 import java.io.File;
+import java.util.Objects;
 
 /**
  *
@@ -37,7 +38,7 @@ public class GPData {
         File folder = new File(filePath);
         File[] listOfFiles = folder.listFiles();
 
-        for (File file : listOfFiles) {
+        for (File file : Objects.requireNonNull(listOfFiles)) {
             if (file.isFile()) {
                 String fullFileName = filePath + file.getName();
                 if (file.getName().contains("Fundamental")) {
@@ -62,7 +63,7 @@ public class GPData {
         }
 
         listOfFiles = folder.listFiles();
-        for (File file : listOfFiles) {
+        for (File file : Objects.requireNonNull(listOfFiles)) {
             if (file.getName().contains("temp")) {
                 file.delete();
             }

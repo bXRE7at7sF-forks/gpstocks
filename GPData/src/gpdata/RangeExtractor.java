@@ -20,7 +20,7 @@ public class RangeExtractor extends Extractor {
     public ArrayList<Range> ranges;
 
     RangeExtractor() {
-        ranges = new ArrayList();
+        ranges = new ArrayList<>();
     }
 
     public void extractRanges() {
@@ -71,7 +71,7 @@ public class RangeExtractor extends Extractor {
                             if (j == files.length - 1) {
                                 //System.out.println("equal");
                                 double valToSqrt = sumOfDiffs /  j;
-                                double calculation = (double)Math.sqrt(valToSqrt);
+                                double calculation = Math.sqrt(valToSqrt);
                                 ranges.get(i).setStdev(calculation);
                                 //System.out.print("\ncalc: " + calculation + " val: "+valToSqrt);
                             }
@@ -110,7 +110,7 @@ public class RangeExtractor extends Extractor {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         RangeExtractor r = new RangeExtractor();
         r.extractRanges();
     }
